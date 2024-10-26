@@ -65,5 +65,16 @@ public class Order {
         return order;
     }
 
+    //==비지니스 로직==//
+    public void cancel() {
+        if (delivery.getStatus() == DeliveryStatus.COMP) {
+            throw new IllegalStateException("already delivery is completed, not able to cancel");
+        }
+
+        this.setStatus(OrderStatus.CANCEL);
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
 
 }
