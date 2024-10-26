@@ -43,7 +43,8 @@ public class OrderItem {
         getItem().addStock(count);
     }
 
+    //==조회 로직==//
     public int getTotalPrice() {
-        return 0;
+        return getOrderPrice() * getCount();
     }
 }
