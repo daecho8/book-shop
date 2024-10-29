@@ -1,16 +1,16 @@
 package com.amazone.bookshop.service;
 
-import com.amazone.bookshop.domain.Delivery;
-import com.amazone.bookshop.domain.Member;
-import com.amazone.bookshop.domain.Order;
-import com.amazone.bookshop.domain.OrderItem;
+import com.amazone.bookshop.domain.*;
 import com.amazone.bookshop.domain.item.Item;
 import com.amazone.bookshop.repository.ItemRepository;
 import com.amazone.bookshop.repository.MemberRepository;
 import com.amazone.bookshop.repository.OrderRepository;
+import com.amazone.bookshop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -42,4 +42,7 @@ public class OrderService {
         order.cancel();
     }
 
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
+    }
 }
